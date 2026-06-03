@@ -1,0 +1,32 @@
+RewriteEngine On
+
+
+#-----------------------------------------------#
+# SET THE WEBSITE LANDING PAGE
+#-----------------------------------------------#
+
+RewriteRule ^$  index.php
+RewriteRule ^admin$  cpanel/web_pages/auth.php?page=login
+       
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+
+ # SET news PAGES
+RewriteRule ^news/([0-9]+)(/*)$ website/corporate/single_news?action=$1
+
+RewriteRule ^scan(/*)$ riba.scan.apk
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^sub_directory/(.*)$ /$1 [R=301,NC,L]
+</IfModule>
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php73” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
