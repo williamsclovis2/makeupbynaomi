@@ -164,15 +164,15 @@
             <div class="container">
                <!-- Section Title Start -->
                <div class="section-title text-center">
-                  <h2>New Arrivals</h2>
+                  <h2>New Makeup / Arrivals</h2>
                   <p>Fresh wigs & makeup drops — be the first to own them</p>
                </div>
                <!-- Section Title End -->
                <!-- Filter Tabs Start -->
                <div class="arrival-filter-tabs text-center mb-40">
-                  <button class="arrival-tab active" data-filter="all">All</button>
+                  <button class="arrival-tab" data-filter="all">All</button>
+                  <button class="arrival-tab active" data-filter="makeup">Makeup</button>
                   <button class="arrival-tab" data-filter="wigs">Wigs</button>
-                  <button class="arrival-tab" data-filter="makeup">Makeup</button>
                </div>
                <!-- Filter Tabs End -->
                <!-- All Products Wrapper -->

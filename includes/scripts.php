@@ -77,7 +77,7 @@ document.addEventListener('keydown', function(e) {
 
    var ITEMS_PER_PAGE = 8;
    var currentPage   = 1;
-   var currentFilter = 'all';
+   var currentFilter = 'makeup';
 
    var tabs  = document.querySelectorAll('.arrival-tab');
    var allItems = Array.from(document.querySelectorAll('.arrival-item'));

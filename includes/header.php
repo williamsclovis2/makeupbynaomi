@@ -142,9 +142,9 @@
                                     home
                                 </a>
                             </li>
-                            <li class="position-static <?php echo ($page == 'shop') ? 'active' : ''; ?>">
-                                <a class="" href="shop">
-                                    Make  up
+                            <li class="position-static <?php echo ($page == 'makeups') ? 'active' : ''; ?>">
+                                <a class="" href="makeups">
+                                    Our Makeups
                                 </a>
                             
                             </li>
@@ -185,7 +185,7 @@
                                 </ul>
                                 <!-- Home Version Dropdown End -->
                             </li>
-                            <li class="active position-static">
+                            <li class=" position-static">
                                 <a class="" href="contact">contact us</a>
                             </li>
                             
