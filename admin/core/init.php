@@ -2,14 +2,12 @@
 
 ob_start();
 session_start();
-// ini_set('session.save_path',realpath(dirname('sessions')));
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
 
 //------------------//
-// CONFIGURE HTTPS //
-
+// CONFIGURE HTTPS  //
 if ($_SERVER['HTTP_HOST'] != 'localhost' && $_SERVER['HTTP_HOST'] != '127.0.0.1') {
     $http = 'https';
     if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off") {
@@ -22,9 +20,6 @@ if ($_SERVER['HTTP_HOST'] != 'localhost' && $_SERVER['HTTP_HOST'] != '127.0.0.1'
     $http = 'http';
 }
 
-// for test //
-//  $http = 'http';
-
 function def() {
     define("CT", "Controller");
     define("_", "/");
@@ -36,10 +31,10 @@ function def() {
     define("_VIEWS_", "resources/views/");
     define("_PATH_VIEWS_", "./views/");
     define("DN", Config::get('url/home'));
-    define('Controller_NS', 'app\Http\Controllers\\');  // NS => Namespace
+    define('Controller_NS', 'app\Http\Controllers\\');
     define('Url_NS', 'app\Http\Url\\');
     define("DNADMIN", DN . _ . Config::get('url/bk_dir'));
-    
+
     define("PAC_HOUSE_SALE", "HOUSES FOR SALE");
     define("PAC_CAR_SALE", "CARS FOR SALE");
     define("PAC_CAR_RENT", "CARS FOR RENT");
@@ -52,52 +47,41 @@ require_once 'functions/global.php';
 
 $GLOBALS['config'] = array(
     'mysql' => array(
-        // 'host' => 'localhost',
-        // 'username' => 'mkupbynaomi',
-        // 'password' => 'MKupbyNaomi!',
-        // 'db' => 'makenzrx_makeubynaomi'
-
-        'host' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'db' => 'barclaynails'
+        // SERVER VALUES (default) — overridden locally by config.local.php
+        'host'     => 'localhost',
+        'username' => 'makenzrx_mkupbynaomi',
+        'password' => 'MKupbyNaomi!',
+        'db'       => 'makenzrx_makeubynaomi'
     ),
     'remember' => array(
-        'cookie_name' => 'hash',
-        'subscriber' => 'storiafrica_hash',
-        'cookie_expiry' => 604800,
+        'cookie_name'          => 'hash',
+        'subscriber'           => 'storiafrica_hash',
+        'cookie_expiry'        => 604800,
         'browser_token_expiry' => 60 * 60 * 12,
     ),
     'var' => array(
         'browser_token_name' => 'TimBrowse',
-        'browser_token_ID' => 'TimBrowserID',
+        'browser_token_ID'   => 'TimBrowserID',
     ),
     'session' => array(
         'session_name' => 'storiafrica_ID',
-        'subscriber' => 'storiafrica_hash',
-        'token_name' => 'token'
+        'subscriber'   => 'storiafrica_hash',
+        'token_name'   => 'token'
     ),
     'submit' => array(
         'method' => ''
     ),
-    'token' => array(
-    //'smskey' => "63e6292c250db86b80b8ac64a71e154e46622b79"
-    ),
+    'token' => array(),
     'url' => array(
         'app_dir' => "",
-
-        // ON LOCALHOST
-		
-        'home' => "$http://{$_SERVER['HTTP_HOST']}/naomi-cosm",
-
-        // WHEN ON SERVER 
-        // 'home' => "$http://{$_SERVER['HTTP_HOST']}",  
-        'bk_dir' => "admin",
+        // SERVER VALUE (default) — overridden locally by config.local.php
+        'home'    => "$http://{$_SERVER['HTTP_HOST']}",
+        'bk_dir'  => "admin",
     ),
     'time' => array(
-        'date_time' => Dates::get('D, Y-m-d h:i:s a'),
-        'timestamp' => $time,
-        'seconds' => $time,
+        'date_time'            => Dates::get('D, Y-m-d h:i:s a'),
+        'timestamp'            => $time,
+        'seconds'              => $time,
         'browser_token_expiry' => 60 * 60 * 12,
     ),
     'dev' => array(
@@ -105,7 +89,10 @@ $GLOBALS['config'] = array(
     )
 );
 
-//$_SESSION['storiafrica_ID']=1;
+// Load local environment overrides (never pushed to server)
+if (file_exists(__DIR__ . '/config.local.php')) {
+    require_once __DIR__ . '/config.local.php';
+}
 
 $uri = $_SERVER['REQUEST_URI'];
 $uri_array = explode('?', $uri);
@@ -121,25 +108,12 @@ if (count($uri_array) > 1) {
     }
 }
 
-// Load Classes
-// function __autoload($class){
-// 	$pathArray = explode('\\',$class);
-// 	if(count($pathArray)>1){
-// 		require_once $class . '.php';
-// 	}else{
-// 		require_once 'classes/'.$class . '.php';
-// 	}
-// }
-
-
 function my_autoloader($class) {
     $pathArray = explode('\\', $class);
     if (count($pathArray) > 1) {
         require_once $class . '.php';
     } else {
-        // Build the full path properly
         $file = __DIR__ . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . $class . '.php';
-        
         if (file_exists($file)) {
             require_once $file;
         }
@@ -148,23 +122,20 @@ function my_autoloader($class) {
 
 spl_autoload_register('my_autoloader');
 
-spl_autoload_register('my_autoloader');
-
-//Initialize Define
+// Initialize Define
 def();
 
 $db = DB::getInstance();
 
 $init = (object) [
-            'db_status' => $db->connected(),
-            'app_token' => microtime(true)
+    'db_status' => $db->connected(),
+    'app_token' => microtime(true)
 ];
 
 $appData = new AppData();
 $appData->setDBStatus($db->connected());
 
 /* Logout */
-
 if (Input::checkInput('logout', 'get', 0)) {
     $userClass = new User();
     $sessionName = Config::get('session/session_name');
@@ -207,7 +178,6 @@ if (Session::exists($sessionName)) {
     if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('session/session_name'))) {
         $hash = Cookie::get(Config::get('remember/cookie_name'));
         $hashCheck = DB::getInstance()->get('user_session', array('hash', '=', $hash));
-
         if ($hashCheck->count()) {
             $userID = $hashCheck->first()->user_ID;
             $user = new User($userID);
@@ -246,7 +216,6 @@ if ($session_subscriber->isLoggedIn()) {
     $session_subscriber_ID = $session_subscriber_data->ID;
     $session_registration_ID = $session_subscriber_data->registration_ID;
 
-    // $sessionParticipantTable = new Participant();
     if ($session_registration_ID) {
         $sessionParticipantTable->selectQuery("SELECT* FROM `events_participant` WHERE `code`=? LIMIT 1", array($session_subscriber_data->registration_ID));
         if ($sessionParticipantTable->count()) {
@@ -255,7 +224,6 @@ if ($session_subscriber->isLoggedIn()) {
         }
     }
 }
-// $page="";
 
-
+$page = "";
 ?>

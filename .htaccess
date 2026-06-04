@@ -27,6 +27,12 @@ RewriteRule ^sub_directory/(.*)$ /$1 [R=301,NC,L]
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php73” package as the default “PHP” programming language.
 <IfModule mime_module>
-  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+  AddHandler application/x-httpd-ea-php81 .php .php7 .phtml
+
 </IfModule>
+# Block browser access to local config
+<Files "config.local.php">
+    Order allow,deny
+    Deny from all
+</Files>
 # php -- END cPanel-generated handler, do not edit
