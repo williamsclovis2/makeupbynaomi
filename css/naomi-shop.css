@@ -1,0 +1,269 @@
+/* ==========================================================
+   NAOMI BEAUTY — SHOP STYLES
+   Built on YOUR original class names (nb-product-card,
+   nb-swatch, nb-modal-*, nb-btn-cart, etc.) so this drops
+   into your site's visual language instead of introducing a
+   second, competing design system.
+
+   NOTE: if any of these class names are already styled in
+   your site's main stylesheet, compare the two and keep
+   whichever rule set you prefer — don't load both, or you'll
+   get conflicting styles fighting each other.
+
+   New classes that did NOT exist in your original page (size
+   picker, quantity stepper, category-swatch preview, etc.)
+   are all prefixed nb- and called out in comments below.
+   ========================================================== */
+
+:root{
+  --nb-ink:      #1B1410;
+  --nb-cream:    #FBF7F0;
+  --nb-panel:    #FFFFFF;
+  --nb-charcoal: #241C17;
+  --nb-burgundy: #6B1A2A;
+  --nb-honey:    #9A6B3A;
+  --nb-gold:     #B8923D;
+  --nb-line:     rgba(27,20,16,0.12);
+  --nb-line-soft:rgba(27,20,16,0.07);
+  --nb-radius:   6px;
+}
+
+.nb-shop-wrap, .nb-shop-wrap *{ box-sizing:border-box; }
+.nb-shop-wrap{
+  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  color: var(--nb-ink);
+  background: var(--nb-cream);
+}
+
+.nb-shop-wrap button{ font-family:inherit; }
+.nb-shop-wrap .container{ max-width:1240px; margin:0 auto; }
+
+
+.nb-hero-tag{
+  display:inline-block;
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:#D8C9A3;
+  border:1px solid rgba(251,247,240,.25);
+  border-radius:999px;
+  padding:6px 14px;
+  margin-bottom:16px;
+}
+.nb-shop-hero h1{ font-size: clamp(28px,4vw,44px); font-weight:700; margin:0 0 12px; line-height:1.1; }
+.nb-shop-hero p{ max-width:560px; color:rgba(251,247,240,.78); font-size:15px; line-height:1.6; margin:0; }
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb-area{ padding:14px 0; border-bottom:1px solid var(--nb-line-soft); }
+.breadcrumb-list{ list-style:none; display:flex; gap:8px; font-size:13px; color:rgba(27,20,16,.55); margin:0; padding:0; }
+.breadcrumb-list .breadcrumb-item:not(:last-child)::after{ content:"/"; margin-left:8px; color:rgba(27,20,16,.3); }
+.breadcrumb-list a{ color: var(--nb-burgundy); }
+.breadcrumb-list .active{ color: var(--nb-ink); }
+
+.wrapper-section{
+  padding:70px 0 !important;
+}
+
+
+/* ---------- Main layout ---------- */
+.nb-shop-main{ padding:34px 0 60px; }
+
+/* ---------- Toolbar ---------- */
+.nb-toolbar{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:18px; }
+.nb-result-count{ font-size:14px; color:rgba(27,20,16,.65); margin-right:auto; }
+.nb-search-input{ display:flex; align-items:center; gap:8px; border:1px solid var(--nb-line); border-radius:999px; padding:8px 16px; background:#fff; min-width:200px; }
+.nb-search-input input{ border:none; outline:none; font-size:14px; width:100%; background:transparent; }
+.nb-sort-select{ border:1px solid var(--nb-line); border-radius:var(--nb-radius); padding:9px 14px; font-size:13.5px; background:#fff; }
+.nb-view-btns{ display:flex; gap:4px; border:1px solid var(--nb-line); border-radius:var(--nb-radius); overflow:hidden; }
+.nb-view-btn{ padding:9px 12px; display:flex; }
+.nb-view-btn.active{ background:var(--nb-ink); color:#fff; }
+
+/* ---------- Active filters ---------- */
+.nb-active-filters{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:22px; font-size:13px; }
+.nb-active-filters > span:first-child{ color:rgba(27,20,16,.55); }
+.nb-filter-tag{
+  display:flex; align-items:center; gap:6px;
+  background:#fff; border:1px solid var(--nb-line); border-radius:999px;
+  padding:6px 12px; font-size:12.5px; cursor:pointer;
+}
+.nb-clear-all{ color:var(--nb-burgundy); cursor:pointer; font-weight:600; }
+
+/* ---------- Section head ---------- */
+.nb-section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--nb-line); }
+.nb-section-head h2{ font-size:24px; font-weight:700; margin:0; }
+.nb-section-head a{ font-size:13px; font-weight:600; color:var(--nb-burgundy); display:flex; align-items:center; gap:4px; }
+.nb-section-divider{ border:none; border-top:1px solid var(--nb-line); margin:44px 0; }
+
+/* ---------- Sub-category tabs (All / Bundles / Wigs) ---------- */
+.nb-shop-tabs{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+.nb-shop-tab{
+  padding:8px 16px; border-radius:999px; border:1px solid var(--nb-line);
+  background:#fff; font-size:13px; font-weight:600; cursor:pointer;
+}
+.nb-shop-tab.active{ background:var(--nb-ink); border-color:var(--nb-ink); color:#fff; }
+
+/* ---------- Product grid & cards ---------- */
+.nb-product-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+@media (max-width:1100px){ .nb-product-grid{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:760px){ .nb-product-grid{ grid-template-columns:repeat(2,1fr); gap:14px; } }
+
+.nb-product-card{
+  background:var(--nb-panel); border:1px solid var(--nb-line); border-radius:var(--nb-radius);
+  overflow:hidden; display:flex; flex-direction:column;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.nb-product-card:hover{ box-shadow:0 12px 30px -14px rgba(27,20,16,.25); transform:translateY(-2px); }
+.nb-card-img{ position:relative; aspect-ratio:4/5; background:linear-gradient(160deg,#efe8db,#e4dbca); overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.nb-card-img img{ width:100%; height:100%; object-fit:contain; display:block; }
+.nb-badge-row{ position:absolute; top:10px; left:10px; display:flex; gap:6px; }
+.nb-badge{ font-size:10.5px; font-weight:700; text-transform:uppercase; padding:4px 8px; border-radius:4px; letter-spacing:.04em; }
+.nb-badge-new{ background:var(--nb-ink); color:#fff; }
+.nb-badge-sale{ background:var(--nb-burgundy); color:#fff; }
+.nb-card-overlay{ position:absolute;  display:flex; flex-direction:column; gap:6px; opacity:0; transform:translateX(6px); transition:.18s ease; }
+.nb-product-card:hover .nb-card-overlay{ opacity:1; transform:none; }
+.nb-overlay-btn{ width:34px; height:34px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; border:none; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,.12); }
+.nb-overlay-btn:hover{ background:var(--nb-ink); color:#fff; }
+
+.nb-card-body{ padding:14px; display:flex; flex-direction:column; gap:6px; flex:1; }
+.nb-card-category{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--nb-honey); font-weight:700; margin:0; }
+.nb-card-title{ font-size:15.5px; font-weight:700; margin:0; line-height:1.3; }
+.nb-stars{ display:flex; gap:2px; color:var(--nb-gold); font-size:12px; }
+.nb-stars .empty{ color:var(--nb-line); }
+.nb-card-price{ margin-top:auto; }
+.nb-price-now{ font-size:15px; font-weight:700; color:var(--nb-burgundy); }
+.nb-price-was{ font-size:12.5px; color:rgba(27,20,16,.4); text-decoration:line-through; margin-left:6px; }
+
+/* card colour preview strip — small, decorative, not the interactive picker */
+.nb-card-swatches{ display:flex; gap:5px; margin-top:2px; }
+.nb-card-swatches span{ width:14px; height:14px; border-radius:3px; box-shadow:0 0 0 1px var(--nb-line); display:block; }
+
+/* ---------- List view ---------- */
+.nb-product-list{ display:flex; flex-direction:column; gap:16px; }
+.nb-list-card{ display:flex; gap:18px; background:#fff; border:1px solid var(--nb-line); border-radius:var(--nb-radius); padding:14px; }
+.nb-list-img{ width:160px; flex:0 0 160px; aspect-ratio:1/1; border-radius:var(--nb-radius); overflow:hidden; background:#eee; display:flex; align-items:center; justify-content:center; }
+.nb-list-img img{ width:100%; height:100%; object-fit:contain; }
+.nb-list-body{ display:flex; flex:1; justify-content:space-between; gap:16px; }
+.nb-list-desc{ font-size:13.5px; color:rgba(27,20,16,.7); line-height:1.55; margin-top:6px; max-width:520px; }
+.nb-list-actions{ display:flex; flex-direction:column; align-items:flex-end; justify-content:space-between; gap:10px; }
+
+/* ---------- Pagination ---------- */
+.nb-pagination{ display:flex; justify-content:center; align-items:center; gap:6px; margin-top:20px; }
+.nb-page-btn{ width:38px; height:38px; display:flex; align-items:center; justify-content:center; border:1px solid var(--nb-line); border-radius:var(--nb-radius); font-size:13.5px; font-weight:600; }
+.nb-page-btn.active{ background:var(--nb-ink); border-color:var(--nb-ink); color:#fff; }
+.nb-page-ellipsis{ color:rgba(27,20,16,.4); }
+
+/* ---------- Colour swatches — SQUARE, 40x40, with margin ----------
+   Applies everywhere colour is selectable: the quick-view modal and
+   the product details page. This replaces the old circular .nb-swatch. */
+.nb-color-swatches{ display:flex; flex-wrap:wrap; gap:10px; }
+.nb-swatch{
+  width:40px; height:40px;
+  border-radius:6px;                 /* square, not circular */
+  border:2px solid transparent;
+  box-shadow:0 0 0 1px var(--nb-line);
+  cursor:pointer;
+  margin:0;                          /* spacing comes from gap, not overlap */
+  transition: border-color .15s ease, transform .15s ease;
+  position:relative;
+}
+.nb-swatch:hover{ transform: translateY(-2px); }
+.nb-swatch.active{ border-color: var(--nb-gold); box-shadow:0 0 0 1px var(--nb-gold); }
+.nb-swatch.active::after{
+  content:"\2713";
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5); font-size:14px;
+}
+
+/* category swatch preview strip in the top tab bar — small squares, not the interactive picker */
+.nb-cat-swatch-preview{ display:flex; gap:3px; margin-right:6px; }
+.nb-cat-swatch-preview span{ width:10px; height:10px; border-radius:2px; display:block; }
+
+/* ---------- Quick View modal ---------- */
+.nb-modal-content{ border-radius:12px; border:none; overflow:hidden; }
+.nb-modal-header{ border-bottom:1px solid var(--nb-line); padding:16px 22px; display:flex; align-items:center; justify-content:space-between; }
+.nb-modal-title{ font-size:16px; font-weight:700; margin:0; }
+.nb-modal-body{ padding:26px; }
+.nb-modal-img{ width:100%; border-radius:var(--nb-radius); display:block; }
+.product-thumbnail .thumb-menu{ display:flex; gap:8px; margin-top:10px; }
+.nb-thumb-img{ width:56px; height:56px; object-fit:cover; border-radius:6px; border:2px solid transparent; cursor:pointer; }
+.thumb-menu a.active .nb-thumb-img{ border-color:var(--nb-burgundy); }
+.nb-modal-product-title{ font-size:22px; font-weight:700; margin:0 0 8px; }
+.nb-stars--modal{ margin-bottom:10px; }
+.nb-modal-price{ margin-bottom:14px; }
+.nb-modal-price .nb-price-now{ font-size:20px; }
+.nb-modal-desc{ font-size:13.5px; line-height:1.6; color:rgba(27,20,16,.72); margin-bottom:18px; }
+.nb-modal-field{ margin-bottom:18px; }
+.nb-modal-label{ display:block; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
+.nb-sort-select--full{ width:100%; }
+.nb-modal-cart-row{ display:flex; gap:10px; margin-bottom:14px; }
+.nb-qty-input{ width:70px; text-align:center; }
+.nb-stock-status{ font-size:13px; color:rgba(27,20,16,.65); display:flex; align-items:center; gap:6px; margin:0; }
+.nb-stock-icon{ color:#2f8f4e; }
+.nb-modal-viewfull{ display:block; margin-top:10px; font-size:13px; color:var(--nb-burgundy); font-weight:700; }
+
+/* ---------- Product details page (full page version of the modal) ---------- */
+/* .nb-pd-wrap{ padding:36px 0 70px; } */
+/* Two-column split now uses Bootstrap's .row / .col-md-6 (stacks automatically below md) */
+.nb-pd-grid{ align-items:flex-start; }
+@media (max-width:767px){ .nb-pd-left{ margin-bottom:28px; } }
+
+/* Left column: main image on top, thumbnail strip below it (matches reference layout) */
+.nb-pd-left{ display:flex; flex-direction:column; }
+.nb-pd-main-img{ border-radius:12px; overflow:hidden; background:linear-gradient(160deg,#efe8db,#e4dbca); aspect-ratio:4/5; }
+.nb-pd-main-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Thumbnail gallery — fixed 40x40 squares, wraps to support any number of images (7+) */
+.nb-pd-thumbs{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.nb-pd-thumb{ width:100px; height:100px; flex:0 0 100px; border-radius:6px; overflow:hidden; border:2px solid transparent; cursor:pointer; }
+.nb-pd-thumb.active{ border-color:var(--nb-burgundy); }
+.nb-pd-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.nb-pd-info{ padding-top:4px; }
+.nb-pd-shipping-note{ font-size:12.5px; color:rgba(27,20,16,.5); margin:-6px 0 18px; }
+
+/* Add to Cart + Pay Another Way, side by side */
+.nb-pd-action-row{ display:flex; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+.nb-pd-action-row .nb-btn-cart{ flex:1 1 200px; }
+.nb-btn-payother{
+  flex:1 1 200px;
+  background:#fff; color:var(--nb-ink); border:1px solid var(--nb-ink);
+  border-radius:var(--nb-radius); font-weight:700; font-size:14px;
+  padding:0 18px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+}
+.nb-btn-payother:hover{ background:var(--nb-cream); }
+.nb-btn-payother[disabled]{ opacity:.45; cursor:not-allowed; }
+
+/* Highlight picker — pill buttons showing the colour NAME (per reference design),
+   replaces the square colour-swatch picker on the product details page. */
+.nb-highlight-picker{ display:flex; flex-wrap:wrap; gap:10px; }
+.nb-highlight-btn{
+  height:40px; padding:0 18px;
+  border-radius:999px; border:1px solid var(--nb-line); background:#fff;
+  font-size:13.5px; font-weight:600; color:var(--nb-ink); cursor:pointer;
+}
+.nb-highlight-btn:hover{ border-color:var(--nb-ink); }
+.nb-highlight-btn.active{ background:var(--nb-ink); border-color:var(--nb-ink); color:#fff; }
+.nb-size-picker{ display:flex; flex-wrap:wrap; gap:10px; }
+.nb-size-btn{
+  min-width:40px; height:40px; padding:0 12px;
+  border-radius:6px; border:1px solid var(--nb-line); background:#fff;
+  font-size:13.5px; font-weight:700; cursor:pointer;
+}
+.nb-size-btn:hover{ border-color:var(--nb-ink); }
+.nb-size-btn.active{ background:var(--nb-ink); border-color:var(--nb-ink); color:#fff; }
+.nb-size-btn[disabled]{ opacity:.35; cursor:not-allowed; text-decoration:line-through; }
+
+.nb-pd-qty-row{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.nb-qty-stepper{ display:flex; align-items:center; border:1px solid var(--nb-line); border-radius:6px; overflow:hidden; height:40px; }
+.nb-qty-stepper button{ width:40px; height:40px; border:none; background:#fff; font-size:17px; cursor:pointer; }
+.nb-qty-stepper button:hover{ background:var(--nb-cream); }
+.nb-qty-stepper input{ width:44px; height:40px; border:none; border-left:1px solid var(--nb-line); border-right:1px solid var(--nb-line); text-align:center; font-size:14px; }
+
+.nb-pd-request-note{ background:#FBF3E7; border:1px solid var(--nb-line); border-radius:6px; padding:12px 14px; font-size:13.5px; margin-bottom:16px; color:rgba(27,20,16,.75); }
+
+/* ---------- Courses promo (replaces the old sidebar banner) ---------- */
+.nb-courses-promo{
+  background: var(--nb-charcoal); color:var(--nb-cream);
+  border-radius:12px; padding:34px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+}
+.nb-courses-promo h3{ font-size:22px; margin:0 0 6px; }
+.nb-courses-promo p{ margin:0; color:rgba(251,247,240,.75); font-size:14px; max-width:460px; }
+.nb-courses-promo a{ background:var(--nb-cream); color:var(--nb-ink); padding:12px 22px; border-radius:999px; font-weight:700; font-size:13.5px; white-space:nowrap; }

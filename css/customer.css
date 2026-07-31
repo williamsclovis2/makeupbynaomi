@@ -3148,6 +3148,10 @@ body {
 	margin: 0 0 5px;
 }
 
+.support-nav{
+	padding:40px 0;
+}
+
 .nb-card-title {
  
 	font-size: .98rem;
@@ -3160,6 +3164,7 @@ body {
 .nb-card-title a {
 	color: inherit;
 	text-decoration: none;
+	font-size: 13px;
 }
 
 .nb-card-title a:hover {
@@ -3209,7 +3214,7 @@ body {
 	gap: 6px;
 	width: 100%;
 	padding: 9px 12px;
-	background: var(--nb-dark);
+	background: var(--nb-rose);
 	color: #fff;
 	font-family: 'Jost', sans-serif;
 	font-size: 11px;
@@ -5498,3 +5503,256 @@ html, body {
         font-size: 12px !important;
     }
 }
+
+/* HISTORY CSS */
+
+  /* ============================================================
+    HISTORY SECTION — scoped to .history-area-custom
+    ============================================================ */
+
+            .history-area-custom {
+                background-color: #b94253;
+                position: relative;
+                overflow: hidden;
+                padding: 90px 0;
+            }
+
+            /* ── Motifs ─────────────────────────────────────────────── */
+            .history-area-custom .hst-motif {
+                position: absolute;
+                pointer-events: none;
+                opacity: 0.13;
+            }
+            .history-area-custom .hst-motif-tl {
+                top: -40px;
+                left: -40px;
+                width: 300px;
+                transform: rotate(-12deg);
+            }
+            .history-area-custom .hst-motif-tr {
+                top: -30px;
+                right: -30px;
+                width: 240px;
+                transform: rotate(18deg);
+            }
+            .history-area-custom .hst-motif-bl {
+                bottom: -50px;
+                left: 30px;
+                width: 200px;
+                transform: rotate(8deg);
+            }
+            .history-area-custom .hst-motif-br {
+                bottom: -40px;
+                right: -30px;
+                width: 270px;
+                transform: rotate(-8deg);
+            }
+            .history-area-custom .hst-motif-mid {
+                top: 50%;
+                left: 50%;
+                width: 520px;
+                transform: translate(-50%, -50%);
+                opacity: 0.04;
+            }
+
+            .history-area-custom .hst-dot-layer {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                overflow: hidden;
+            }
+            .history-area-custom .hst-dot {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.18);
+            }
+
+            /* ── Main row ────────────────────────────────────────────
+    Left col  = photo (normal flow, contained)
+    Right col = pale card with text
+    The card's left edge starts where the photo ends,
+    but the photo slightly overlaps inward — like the screenshot
+    ──────────────────────────────────────────────────────── */
+
+            /* Outer row: no gap, so the photo and card touch */
+            .history-area-custom .hst-row {
+                display: flex;
+                align-items: stretch;
+                gap: 0;
+            }
+
+            /* ── Left photo column ───────────────────────────────────
+    The photo is "small" relative to the card — it sits inside
+    the left half with padding around it (like the screenshot
+    where the image has clear white/bg space above and below).
+    We replicate this with a wrapper that has vertical padding
+    on the rose background, so the photo floats inside the section.
+    */
+            .history-area-custom .hst-img-col {
+                width: 45%;
+                flex-shrink: 0;
+                padding: 30px 0 30px 0; /* photo smaller than full height */
+                position: relative;
+                z-index: 2;
+            }
+
+            .history-area-custom .hst-img-col img {
+                display: block;
+                width: 92%;
+                height: 100%;
+                object-fit: cover;
+                object-position: top center;
+                border-radius: 3px;
+                box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.18);
+                transition: transform 0.6s ease;
+            }
+            .history-area-custom .hst-img-col:hover img {
+                transform: scale(1.03);
+            }
+
+            /* ── Right content card ──────────────────────────────────
+    Starts from the mid-point. The card's left edge is pulled
+    left by a negative margin so it slides under the photo's
+    right side — recreating the "image enters the box" overlap.
+    */
+            .history-area-custom .hst-card {
+                flex: 1;
+                background: #f5eced;
+                border-radius: 3px;
+                margin-left: -60px; /* pull card left so photo overlaps its left edge */
+                padding: 50px 48px 50px 80px; /* extra left pad clears the overlap zone */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
+                z-index: 1; /* photo is z-index:2, card is z-index:1 — photo on top */
+            }
+
+            /* ── Typography ──────────────────────────────────────────── */
+            .history-area-custom .hst-eyebrow {
+                display: block;
+                font-size: 0.68rem;
+                font-weight: 500;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: #b94253;
+                margin-bottom: 8px;
+            }
+
+            .history-area-custom .hst-card h2 {
+                font-size: 1.95rem;
+                font-weight: 700;
+                color: #1e1226;
+                line-height: 1.2;
+                margin-bottom: 0;
+            }
+
+            .history-area-custom .hst-divider {
+                width: 44px;
+                height: 3px;
+                background: linear-gradient(90deg, #b94253, #d4a96a);
+                border-radius: 2px;
+                margin: 14px 0 18px;
+            }
+
+            .history-area-custom .hst-desc {
+                font-size: 0.93rem;
+                line-height: 1.8;
+                color: #3d2535;
+                margin-bottom: 22px;
+            }
+
+            .history-area-custom .hst-touch-title {
+                font-size: 1.22rem;
+                font-weight: 600;
+                color: #1e1226;
+                margin-bottom: 10px;
+            }
+
+            .history-area-custom .hst-card ul {
+                list-style: none;
+                padding: 0;
+                margin-bottom: 32px;
+            }
+            .history-area-custom .hst-card ul li {
+                font-size: 0.9rem;
+                line-height: 1.75;
+                color: #3d2535;
+                padding-left: 18px;
+                position: relative;
+                margin-bottom: 8px;
+            }
+            .history-area-custom .hst-card ul li::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 9px;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #b94253;
+            }
+
+            /* ── Button ──────────────────────────────────────────────── */
+            .history-area-custom .hst-btn {
+                display: inline-block;
+                font-size: 0.78rem;
+                font-weight: 500;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: #fff;
+                background: #b94253;
+                border: none;
+                padding: 12px 34px;
+                border-radius: 2px;
+                box-shadow: 3px 3px 0 #9c3346;
+                text-decoration: none;
+                align-self: flex-start;
+                transition:
+                    background 0.25s,
+                    transform 0.2s,
+                    box-shadow 0.2s;
+            }
+            .history-area-custom .hst-btn:hover {
+                background: #9c3346;
+                color: #fff;
+                transform: translate(-2px, -2px);
+                box-shadow: 5px 5px 0 #1e1226;
+                text-decoration: none;
+            }
+
+            /* ── Responsive ──────────────────────────────────────────── */
+            @media (max-width: 991px) {
+                .history-area-custom .hst-row {
+                    flex-direction: column;
+                }
+                .history-area-custom .hst-img-col {
+                    width: 100%;
+                    height: 300px;
+                    padding: 0;
+                }
+                .history-area-custom .hst-img-col img {
+                    height: 300px;
+                    border-radius: 3px 3px 0 0;
+                    box-shadow: none;
+                }
+                .history-area-custom .hst-card {
+                    margin-left: 0;
+                    padding: 40px 28px;
+                    border-radius: 0 0 3px 3px;
+                }
+            }
+            @media (max-width: 575px) {
+                .history-area-custom .hst-img-col {
+                    height: 240px;
+                }
+                .history-area-custom .hst-img-col img {
+                    height: 240px;
+                }
+                .history-area-custom .hst-card {
+                    padding: 32px 18px;
+                }
+                .history-area-custom .hst-card h2 {
+                    font-size: 1.6rem;
+                }
+            }
